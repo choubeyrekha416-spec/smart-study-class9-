@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Smart Study Class 9 - free study notes, revision and quizzes.">
+<title>Smart Study | Class 9</title>
+<style>
+:root{--navy:#172554;--blue:#3156ce;--sky:#eaf0ff;--ink:#17213b;--muted:#667085;--white:#fff;--green:#15803d}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#f5f7ff;color:var(--ink);line-height:1.55}
+header{background:linear-gradient(120deg,#172554,#3156ce);color:white;padding:28px 18px 22px}
+.wrap{max-width:1050px;margin:auto}
+.top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:1.35rem;letter-spacing:.2px}
+.tag{font-size:.9rem;opacity:.9}
+.hero{padding:28px 0 18px}
+.hero h1{font-size:clamp(1.8rem,5vw,3rem);line-height:1.1;margin:0 0 10px}
+.hero p{max-width:650px;margin:0;color:#e5eaff}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+nav button{background:#ffffff20;color:white;border:1px solid #ffffff50;padding:9px 13px;border-radius:999px}
+nav button.active,nav button:hover{background:white;color:var(--navy)}
+main{max-width:1050px;margin:24px auto;padding:0 16px}
+.panel{display:none}.panel.active{display:block}
+.card{background:white;border:1px solid #e5eaf5;border-radius:17px;padding:19px;box-shadow:0 6px 20px #15234b0a}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:14px}
+.subject{cursor:pointer;text-align:left;transition:.15s}
+.subject:hover{transform:translateY(-2px);border-color:#aabaff}
+.subject .emoji{font-size:1.8rem}
+h2{margin:0 0 14px;font-size:1.45rem}
+h3{margin:8px 0 5px}
+p{margin:7px 0}
+.muted{color:var(--muted)}
+.pill{display:inline-block;background:var(--sky);color:#2445ad;padding:4px 9px;border-radius:999px;font-size:.8rem;font-weight:650}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+button,.btn{font:inherit;cursor:pointer}
+.primary{background:var(--blue);color:white;border:0;border-radius:10px;padding:10px 15px;font-weight:650}
+.secondary{background:#edf1ff;color:#2445ad;border:0;border-radius:10px;padding:10px 15px;font-weight:650}
+.subject-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.chapter{border:1px solid #e6eaf2;border-radius:12px;padding:13px;margin:10px 0;background:#fff}
+.chapter summary{cursor:pointer;font-weight:700}
+.note{background:#f7f9ff;border-left:4px solid var(--blue);padding:12px;border-radius:8px;margin-top:10px}
+input[type=text]{width:100%;max-width:450px;padding:11px;border:1px solid #cbd5e1;border-radius:10px;font:inherit}
+.quiz-option{display:block;width:100%;text-align:left;background:#f5f7ff;border:1px solid #dce4f5;border-radius:10px;padding:11px;margin:8px 0}
+.quiz-option:hover{border-color:var(--blue)}
+.good{color:var(--green);font-weight:700}.bad{color:#b42318;font-weight:700}
+.progress{height:10px;background:#e8ecf5;border-radius:20px;overflow:hidden}
+.progress>div{height:100%;background:#3156ce;width:0;transition:.2s}
+footer{text-align:center;color:#667085;padding:28px 15px;font-size:.9rem}
+.small{font-size:.9rem}
+@media(max-width:560px){header{padding:20px 15px}.hero{padding:22px 0 12px}.card{padding:15px}nav button{font-size:.9rem}}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap">
+  <div class="top"><div class="brand">📚 Smart Study</div><div class="tag">A simple learning space for Class 9</div></div>
+  <section class="hero">
+   <h1>Learn a little.<br>Improve every day.</h1>
+   <p>Explore subjects, revise key ideas, practise questions and keep track of your study goals.</p>
+  </section>
+  <nav aria-label="Main navigation">
+   <button class="active" data-page="home">Home</button>
+   <button data-page="subjects">Subjects</button>
+   <button data-page="quiz">Quick quiz</button>
+   <button data-page="planner">Study planner</button>
+  </nav>
+ </div>
+</header>
+<main>
+ <section id="home" class="panel active">
+  <div class="grid">
+   <div class="card"><span class="pill">Your learning hub</span><h2 style="margin-top:10px">Welcome, student! 👋</h2><p class="muted">Choose a subject to begin. This starter site works on phones and computers.</p><div class="actions"><button class="primary" onclick="showPage('subjects')">Explore subjects</button></div></div>
+   <div class="card"><h2>Today's progress</h2><p><strong id="doneCount">0</strong> of 4 study goals completed</p><div class="progress"><div id="progressBar"></div></div><p class="muted small">Your checklist is saved on this device.</p><button class="secondary" onclick="showPage('planner')">Open planner</button></div>
+  </div>
+  <div class="card" style="margin-top:15px"><h2>Study tips</h2><div class="grid"><div><h3>⏱️ Focus</h3><p class="muted">Study for a short focused session, then take a quick break.</p></div><div><h3>✍️ Recall</h3><p class="muted">Close your book and explain the idea in your own words.</p></div><div><h3>🔁 Revise</h3><p class="muted">Review important points again after a day or two.</p></div></div></div>
+ </section>
+ <section id="subjects" class="panel">
+  <h2>Choose a subject</h2><p class="muted">Select a card to see starter revision topics. Your exact chapters may vary by board and textbook.</p>
+  <div class="grid" id="subjectGrid"></div>
+ </section>
+ <section id="subjectDetail" class="panel">
+  <div class="subject-head"><button class="secondary" onclick="showPage('subjects')">← Subjects</button><div><h2 id="detailTitle" style="margin:0"></h2><div class="muted small">Starter revision notes</div></div></div>
+  <div id="chapterList"></div>
+ </section>
+ <section id="quiz" class="panel">
+  <div class="card"><span class="pill">Practice</span><h2 style="margin-top:10px">Quick science quiz</h2><p id="questionText"></p><div id="options"></div><p id="quizFeedback" aria-live="polite"></p><div class="actions"><button class="primary" id="nextQuestion">Next question</button><span class="muted small" id="quizCount"></span></div></div>
+ </section>
+ <section id="planner" class="panel">
+  <div class="card">
+   <h2>My daily study planner 🗓️</h2>
+   <p class="muted">Make a simple timetable for today. Your plan is saved in this browser on this device.</p>
+   <form id="planForm" class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));align-items:end">
+    <label class="small">Study time<br><input id="planTime" type="time" required style="padding:10px;border:1px solid #cbd5e1;border-radius:9px;width:100%;font:inherit"></label>
+    <label class="small">Subject / task<br><input id="planTask" type="text" placeholder="e.g. Maths: exercise 1" required maxlength="80" style="padding:10px;border:1px solid #cbd5e1;border-radius:9px;width:100%;font:inherit"></label>
+    <button class="primary" type="submit">+ Add to planner</button>
+   </form>
+   <div id="dailyPlan" style="margin-top:16px"></div>
+   <p id="planEmpty" class="muted small">No study sessions added yet. Add your first task above.</p>
+  </div>
+  <div class="card" style="margin-top:15px"><h2>Daily checklist</h2><p class="muted">Tick these goals when you finish them.</p>
+   <div id="taskList"></div>
+   <div class="actions"><button class="secondary" onclick="resetTasks()">Reset checklist</button><button class="secondary" onclick="clearPlan()">Clear timetable</button></div>
+  </div>
+ </section>
+</main>
+<footer>Smart Study · Class 9 · Keep learning, keep growing.</footer>
+<script>
+const subjects=[
+ {name:"Mathematics",emoji:"➗",topics:[
+  ["Number systems","Rational numbers can be written as p/q, where p and q are integers and q is not zero. Irrational numbers cannot be written in this form. Real numbers include both rational and irrational numbers."],
+  ["Polynomials","A polynomial is an algebraic expression with variables having non-negative whole-number powers. The degree is the greatest power of the variable with a non-zero coefficient."],
+  ["Coordinate geometry","The Cartesian plane has a horizontal x-axis and a vertical y-axis. Their intersection is the origin (0, 0). A point is written as an ordered pair (x, y)."]
+ ]},
+ {name:"Science",emoji:"🔬",topics:[
+  ["Matter in our surroundings","Matter has mass and occupies space. The common states are solid, liquid and gas. Particles of matter are continuously moving and have spaces between them."],
+  ["The fundamental unit of life","The cell is the basic structural and functional unit of life. The cell membrane controls the movement of substances into and out of the cell."],
+  ["Motion","Motion is a change in position with time. Speed is distance travelled per unit time. SI unit of speed is metre per second (m/s)."]
+ ]},
+ {name:"Social Science",emoji:"🌍",topics:[
+  ["History: understanding the past","History studies past events using sources such as documents, objects, buildings and accounts. Check your prescribed textbook for the chapters in your course."],
+  ["Geography: our environment","Geography studies places, people and the natural environment. Maps, globes and diagrams help us understand locations and patterns."],
+  ["Civics: democracy","Democracy is a form of government in which people choose their representatives through elections. Democratic systems should protect equality and participation."]
+ ]},
+ {name:"English",emoji:"📘",topics:[
+  ["Reading skills","Read the passage carefully, identify its main idea and look for supporting details. Use context to understand unfamiliar words."],
+  ["Parts of speech","The main parts of speech include nouns, pronouns, verbs, adjectives, adverbs, prepositions, conjunctions and interjections."],
+  ["Writing skills","Plan your writing, organise ideas into paragraphs, use clear sentences and check spelling and punctuation."]
+ ]},
+ {name:"Hindi",emoji:"📗",topics:[
+  ["अपठित गद्यांश","गद्यांश को ध्यान से पढ़ें। मुख्य विचार समझें और उत्तर अपने शब्दों में स्पष्ट रूप से लिखें।"],
+  ["व्याकरण","संज्ञा, सर्वनाम, विशेषण और क्रिया हिंदी व्याकरण के महत्वपूर्ण विषय हैं। उदाहरणों के साथ अभ्यास करें।"],
+  ["लेखन कौशल","पत्र, अनुच्छेद और निबंध लिखते समय विषय के अनुसार सरल भाषा और सही क्रम का प्रयोग करें।"]
+ ]},
+ {name:"Computer",emoji:"💻",topics:[
+  ["Computer basics","A computer accepts data, processes it, stores it and produces information. Hardware refers to physical parts; software contains instructions."],
+  ["Internet safety","Use strong unique passwords, keep personal information private and check information before trusting or sharing it."],
+  ["Algorithms","An algorithm is a clear sequence of steps used to solve a problem. A flowchart represents steps using standard symbols."]
+ ]}
+];
+const subjectGrid=document.getElementById("subjectGrid");
+subjects.forEach((s,i)=>{const el=document.createElement("button");el.className="card subject";el.innerHTML=`<div class="emoji">${s.emoji}</div><h3>${s.name}</h3><p class="muted small">${s.topics.length} starter topics</p>`;el.onclick=()=>openSubject(i);subjectGrid.appendChild(el)});
+function showPage(id){document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));window.scrollTo({top:0,behavior:"smooth"})}
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
+function openSubject(i){const s=subjects[i];document.getElementById("detailTitle").textContent=s.emoji+" "+s.name;const list=document.getElementById("chapterList");list.innerHTML="";s.topics.forEach((t,j)=>{const d=document.createElement("details");d.className="chapter";d.open=j===0;const summary=document.createElement("summary");summary.textContent=t[0];const note=document.createElement("div");note.className="note";note.textContent=t[1];d.append(summary,note);list.appendChild(d)});showPage("subjectDetail")}
+const tasks=["Revise one Mathematics topic","Read one Science topic","Practise English or Hindi","Review today's class notes"];
+function getTasks(){try{return JSON.parse(localStorage.getItem("smartStudyTasks"))||[]}catch(e){return []}}
+function saveTasks(v){localStorage.setItem("smartStudyTasks",JSON.stringify(v));renderTasks()}
+function renderTasks(){const done=getTasks();document.getElementById("taskList").innerHTML=tasks.map((t,i)=>`<label style="display:block;padding:12px 2px;border-bottom:1px solid #edf0f5"><input type="checkbox" data-task="${i}" ${done.includes(i)?"checked":""}> ${t}</label>`).join("");document.querySelectorAll("[data-task]").forEach(c=>c.addEventListener("change",()=>{let a=getTasks();a=c.checked?[...a,Number(c.dataset.task)]:a.filter(x=>x!==Number(c.dataset.task));saveTasks(a)}));document.getElementById("doneCount").textContent=done.length;document.getElementById("progressBar").style.width=(done.length/4*100)+"%"}
+function resetTasks(){saveTasks([])}
+function getPlan(){try{return JSON.parse(localStorage.getItem("smartStudyPlan"))||[]}catch(e){return []}}
+function savePlan(items){localStorage.setItem("smartStudyPlan",JSON.stringify(items));renderPlan()}
+function renderPlan(){
+ const items=getPlan().sort((a,b)=>a.time.localeCompare(b.time));
+ const holder=document.getElementById("dailyPlan");
+ const empty=document.getElementById("planEmpty");
+ empty.style.display=items.length?"none":"block";
+ holder.innerHTML="";
+ items.forEach((item,index)=>{
+  const row=document.createElement("div");
+  row.className="chapter";
+  row.style.display="flex";row.style.justifyContent="space-between";row.style.alignItems="center";row.style.gap="10px";
+  const info=document.createElement("div");
+  const time=document.createElement("strong");time.textContent=item.time+"  ";
+  const task=document.createElement("span");task.textContent=item.task;
+  info.append(time,task);
+  const del=document.createElement("button");del.className="secondary";del.type="button";del.textContent="Remove";
+  del.onclick=()=>{const current=getPlan();current.splice(current.findIndex(x=>x.id===item.id),1);savePlan(current)};
+  row.append(info,del);holder.appendChild(row);
+ });
+}
+document.getElementById("planForm").addEventListener("submit",event=>{
+ event.preventDefault();
+ const time=document.getElementById("planTime").value;
+ const task=document.getElementById("planTask").value.trim();
+ if(!time||!task)return;
+ const items=getPlan();items.push({id:Date.now(),time,task});savePlan(items);
+ document.getElementById("planTask").value="";
+});
+function clearPlan(){savePlan([])}
+const questions=[
+ {q:"What is the basic structural and functional unit of life?",o:["Atom","Cell","Organ","Tissue"],a:1,e:"The cell is the basic structural and functional unit of life."},
+ {q:"What is the SI unit of speed?",o:["Kilometre","Metre per second","Hour","Metre"],a:1,e:"Speed is measured in metres per second (m/s) in SI."},
+ {q:"Which state of matter has a fixed shape and fixed volume?",o:["Gas","Liquid","Solid","Vapour"],a:2,e:"A solid generally has a fixed shape and a fixed volume."},
+ {q:"Which instrument is commonly used to measure temperature?",o:["Thermometer","Barometer","Ammeter","Compass"],a:0,e:"A thermometer is used to measure temperature."}
+];
+let qi=0,answered=false;
+function loadQuestion(){const q=questions[qi];answered=false;document.getElementById("questionText").textContent=(qi+1)+". "+q.q;document.getElementById("options").innerHTML="";q.o.forEach((o,i)=>{const b=document.createElement("button");b.className="quiz-option";b.textContent=o;b.onclick=()=>answer(i);document.getElementById("options").appendChild(b)});document.getElementById("quizFeedback").textContent="";document.getElementById("quizCount").textContent=`Question ${qi+1} of ${questions.length}`}
+function answer(i){if(answered)return;answered=true;const q=questions[qi];const f=document.getElementById("quizFeedback");f.textContent=(i===q.a?"Correct! ":"Not quite. ")+q.e;f.className=i===q.a?"good":"bad"}
+document.getElementById("nextQuestion").onclick=()=>{qi=(qi+1)%questions.length;loadQuestion()};
+renderTasks();renderPlan();loadQuestion();
+</script>
+</body>
+</html>
